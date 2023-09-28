@@ -2,6 +2,8 @@
     --mbg: #cb997e;
     --sbg: #ddbea9;
     --txt: #6b705c;
+    --err: #b30000;
+    --cor: #02b514;
 }
 
 * {
@@ -89,4 +91,8 @@ body, main {
 
 #submit:active {
     border-color: var(--mbg);
+}
+
+.incorrect {
+    border-color: var(--err)
 }

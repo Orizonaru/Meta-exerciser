@@ -6,7 +6,7 @@
     </head>
     <body>
         <main class="flex">
-            <section class="counter">
+            <section class="flex counter">
                 <figure class="flex counter-content">
                     <h1 class="counter-content__header">Three-didgit exerciser</h1>
                     <figure class="flex counter-content__expression">
@@ -14,14 +14,14 @@
                         <h2>+</h2>
                         <h2 id="secondNumber">456</h2>
                     </figure>
-                    <input  class="counter-content__input" id="counterInput" maxlength="4">
+                    <input  class="counter-content__input" id="counterInput" maxlength="4" inputmode="numeric">
                 </figure>
             </section>
         </main>
-        <section>
-            <figure>
-                <h1></h1>
-                <h1>сек</h1>
+        <section class="timer">
+            <figure class="timer-field">
+                <h1 class="timer-field__header" id="timerField">0</h1>
+                <h1 class="timer-field__subheader"> сек</h1>
             </figure>
         </section>
         <script src="script.js"></script>

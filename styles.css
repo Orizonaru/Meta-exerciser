@@ -3,7 +3,6 @@
     --sbg: #ddbea9;
     --txt: #6b705c;
     --err: #b30000;
-    --cor: #02b514;
 }
 
 * {
@@ -75,7 +74,11 @@ body, main {
     border-color: var(--err)
 }
 
-.timer-field {
+.timer {
+    flex-direction: column;
+}
+
+.timer-field, .avgtime-field {
     display: flex;
     position: absolute;
     top: 2rem;
@@ -90,9 +93,13 @@ body, main {
     background-color: var(--sbg)
 }
 
-@media (max-width: 400px) {
+.avgtime-field {
+    top: 11rem
+}
+
+@media (max-width: 1280px) {
     .counter {
-        width: 80%;
-        font-size: ;
+        width: 60%;
+        height: 60%;
     } 
 }

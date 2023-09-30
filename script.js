@@ -2,6 +2,9 @@ const submitButton = document.getElementById("submit");
 const firstDigitField = document.getElementById("firstNumber");
 const secondDigitField = document.getElementById("secondNumber");
 const input = document.getElementById('counterInput')
+const avgTimeField = document.getElementById('avgTimeField')
+let avgTime = 0
+let times = 0
 
 function randomDigit(max) {
   return Math.floor((Math.random() * max)+100);
@@ -22,11 +25,6 @@ secondDigitField.textContent = secondDigitRoot;
 console.log(firstDigitRoot+secondDigitRoot)
 
 timerOn()
-function timeExposer () {
-  timerField.textContent = time
-}
-setInterval(timeExposer, 1000)
-
 input.addEventListener('keyup', (e) => {
   if(e.key === "Enter") {
     if(firstDigitRoot + secondDigitRoot == input.value) {
@@ -39,6 +37,10 @@ input.addEventListener('keyup', (e) => {
       console.log(firstDigitRoot+secondDigitRoot)
       input.value=''
       input.classList.remove("incorrect")
+      timerField.textContent = time
+      avgTime+=time
+      times+=1
+      avgTimeField.textContent = (Math.round(avgTime / times * 100) / 100).toFixed(2)
       time=0
     }
     else {    

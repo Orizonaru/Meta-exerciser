@@ -15,7 +15,7 @@ let time = 0
 function timerOn () {
   setInterval(() => 
   (time+=1),
-  1000);  
+  10);  
 }
 
 let firstDigitRoot = randomDigit(899);
@@ -37,8 +37,8 @@ input.addEventListener('keyup', (e) => {
       console.log(firstDigitRoot+secondDigitRoot)
       input.value=''
       input.classList.remove("incorrect")
-      timerField.textContent = time
-      avgTime+=time
+      timerField.textContent = time/100
+      avgTime+=(time/100)
       times+=1
       avgTimeField.textContent = (Math.round(avgTime / times * 100) / 100).toFixed(2)
       time=0

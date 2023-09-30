@@ -35,7 +35,6 @@ body, main {
 .counter {
     flex-direction: column;
     background-color: var(--sbg);
-    border: 5px solid var(--txt);
     border-radius: 15px;
     width: 40%;
     height: 40%;
@@ -86,7 +85,6 @@ body, main {
     right: 2rem;
     gap: 0.5rem;
     padding: 2rem;
-    border: 5px solid var(--txt);
     border-radius: 10px;
     font-size: 1.5rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

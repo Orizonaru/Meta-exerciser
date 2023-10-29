@@ -1,7 +1,8 @@
-# TDE
-This is a programm, that lets you to train yorself in calculating 3 digit numbers. 
+# Meta exerciser
+This is a programm, that lets you to train yorself in calculating different numbers. 
 
-Version log: 
+Version log:
+Chapter I: TDE
   TDE v1.0:
     > Realese exerciser (only summing)
   TDE v1.1:
@@ -17,3 +18,8 @@ Version log:
     > Added simple mobile optimization
   TDE v1.35:
     > Hundredths are added to the complition time
+Chapter II: Meta exerciser
+  MtEx v1.0:
+    > Transfer the project to Lit
+    > Overall refactoring
+    > Digit-changing system

@@ -3,31 +3,25 @@
     <head>
         <link rel="stylesheet" href="styles.css">
         <meta charset="UTF-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+        <script type="module" src="Components/TaskExerciser.js"></script>
+        <script type="module" src="Components/TimerModule.js"></script>
+        <script type="module" src="Components/StartModule.js"></script>
+        <script type="module" src="Components/DigitSwitcher.js"></script>
     </head>
     <body>
-        <main class="flex">
-            <section class="flex counter">
-                <figure class="flex counter-content">
-                    <h1 class="counter-content__header">Three-didgit exerciser</h1>
-                    <figure class="flex counter-content__expression">
-                        <h2 id="firstNumber">123</h2>
-                        <h2>+</h2>
-                        <h2 id="secondNumber">456</h2>
-                    </figure>
-                    <input  class="counter-content__input" id="counterInput" maxlength="4" inputmode="numeric">
-                </figure>
-            </section>
-        </main>
-        <section class="flex timer">
-            <figure class="timer-field">
-                <h1 class="timer-field__header" id="timerField">-</h1>
-                <h1 class="timer-field__subheader"> сек</h1>
-            </figure>
-            <figure class="avgtime-field">
-                <h1 class="avgtime-field__header" id="avgTimeField">-</h1>
-                <h1 class="avgtime-fieldd__subheader"> сек</h1>
-            </figure>
+        <section class='flex headline'>
+            <h1 class="headline-header">Meta exerciser</h1>
+            <h2 class="headline-subheader">Take your calculation skills to another level!</h2>
         </section>
-        <script src="script.js"></script>
+        <section class="menu flex">
+            <digit-switcher class="menu-switcher"></digit-switcher>
+            <start-module class="menu-start"></start-module>
+        </section>
+        <task-engine num = '1'></task-engine>
+        <time-module></time-module>
+        
     </body>
 </html>

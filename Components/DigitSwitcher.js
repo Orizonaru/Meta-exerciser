@@ -56,18 +56,15 @@ export class DigitSwitcher extends LitElement {
     `]
 
     digitSwitcher(e) {
-        if (e.key === 'Enter') {
-            if (0 < e.target.value && e.target.value < 10) {
-                this.correctionFlag = true
-                dispatchEvent(new CustomEvent ('digit-handle', {
-                    bubbles: true,
-                    detail: {digit: e.target.value}
-                }))
-                e.target.value = ''
-            }
-            else {
-                this.correctionFlag = false
-            }
+        if (0 < e.target.value && e.target.value < 10) {
+            this.correctionFlag = true
+            dispatchEvent(new CustomEvent ('digit-handle', {
+                bubbles: true,
+                detail: {digit: e.target.value}
+            }))
+        }
+        else {
+            this.correctionFlag = false
         }
     }
 
@@ -83,7 +80,7 @@ export class DigitSwitcher extends LitElement {
         return html`
         <section class='flex switcher ${this.startFlag ? 'started' : ''}'>
             <h2 class='switcher-header'>Digit</h2>
-            <input class='switcher-input ${this.correctionFlag ? '' : 'incorrect'}' @keyup = ${(e) => this.digitSwitcher(e)} type='number'>
+            <input class='switcher-input ${this.correctionFlag ? '' : 'incorrect'}' @input = ${(e) => this.digitSwitcher(e)} type='number'>
         </section>
         `
     }

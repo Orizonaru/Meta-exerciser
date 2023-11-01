@@ -121,10 +121,10 @@ export class TaskExerciser extends LitElement {
         let currentValue = e.target.value.slice(-1)
         e.target.value = ''
         var newArray = this.revString.slice();
-        //console.log(e.target.value, newArray)
+
         newArray.unshift(currentValue);
         this.revString = newArray
-        //console.log(this.revString, newArray)
+
         e.target.value = this.revString.join('') */
     }
 

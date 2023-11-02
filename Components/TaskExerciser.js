@@ -14,7 +14,8 @@ export class TaskExerciser extends LitElement {
         avgTimeRes: Number,
         revString: Array,
         lastLen: Number,
-        lastValue: Number
+        lastValue: Number,
+        curValGlob: Array
     }
 
     static styles = 
@@ -118,15 +119,23 @@ export class TaskExerciser extends LitElement {
 
     reverseText(e) {
         let currentValue = e.target.value.split('')
+        let newElm = currentValue.slice(-1)  // взятие нового
         let currentLen = currentValue.length
         if (currentLen < this.lastLen) {
-            e.target.value = (this.lastValue.slice(1)).join('')
+            this.curValGlob = this.curValGlob.slice(0, this.curValGlob.length-1)
+            this.curValGlob = this.curValGlob.reverse()
+            e.target.value = this.curValGlob.join('')
+            this.curValGlob = this.curValGlob.reverse()
+        } else {
+            this.curValGlob.push(String(newElm))
+            this.curValGlob = this.curValGlob.reverse()
+            e.target.value = this.curValGlob.join('') // пулл в строку нового
+            this.curValGlob = this.curValGlob.reverse()
+            this.lastLen = currentLen
+            this.lastValue = currentValue
         }
-        console.log(this.lastValue)
-        console.log(currentValue)
-        currentValue = this.lastValue.slice(1)
-        this.lastLen = currentLen
-        this.lastValue = currentValue
+
+        
         /*
         let inputState = e.target.value.split('')
         console.log(inputState)
@@ -163,6 +172,7 @@ export class TaskExerciser extends LitElement {
         this.lastValue = []
         this.correctionFlag = true
         this.revString = []
+        this.curValGlob = []
         
     }
 

@@ -43,7 +43,7 @@ export class StartModule extends LitElement {
     `
 
     startFunc(e) {
-        if (this.digit) {
+        if (this.digit > 0 & this.digit < 10) {
                 this.startFlag = true
                 this.correctionFlag = true
                 dispatchEvent(new CustomEvent('start-handle', {

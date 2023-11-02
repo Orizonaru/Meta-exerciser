@@ -13,6 +13,8 @@ export class TaskExerciser extends LitElement {
         attempts: Number,
         avgTimeRes: Number,
         revString: Array,
+        lastLen: Number,
+        lastValue: Number
     }
 
     static styles = 
@@ -115,9 +117,20 @@ export class TaskExerciser extends LitElement {
     }
 
     reverseText(e) {
+        let currentValue = e.target.value.split('')
+        let currentLen = currentValue.length
+        if (currentLen < this.lastLen) {
+            e.target.value = (this.lastValue.slice(1)).join('')
+        }
+        console.log(this.lastValue)
+        console.log(currentValue)
+        currentValue = this.lastValue.slice(1)
+        this.lastLen = currentLen
+        this.lastValue = currentValue
+        /*
         let inputState = e.target.value.split('')
         console.log(inputState)
-        /*
+        
         let currentValue = e.target.value.slice(-1)
         e.target.value = ''
         var newArray = this.revString.slice();
@@ -146,6 +159,8 @@ export class TaskExerciser extends LitElement {
         this.avgTime = 0
         this.avgTimeRes = 0
         this.attempts = 0
+        this.lastLen = 0
+        this.lastValue = []
         this.correctionFlag = true
         this.revString = []
         

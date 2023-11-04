@@ -63,6 +63,9 @@ export class StartModule extends LitElement {
         window.addEventListener('digit-handle', (e) => {
             this.digit = e.detail.digit
         })
+        window.addEventListener('start-handle', (e) => {
+            this.startFlag = e.detail.startFlag
+        })
         this.correctionFlag = true
     }
 

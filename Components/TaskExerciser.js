@@ -109,7 +109,8 @@ export class TaskExerciser extends LitElement {
                     bubbles: true,
                     detail: {
                         time: (this.time).toFixed(2),
-                        avgTime: this.avgTimeRes
+                        avgTime: this.avgTimeRes,
+                        attempts: this.attempts
                     }
                 }))
                 e.target.value = ''

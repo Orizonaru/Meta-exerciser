@@ -4,7 +4,8 @@ export class TimerModule extends LitElement {
     static properties = {
         time: Number,
         avgTime: Number,
-        startFlag: Boolean
+        startFlag: Boolean,
+        attempts: Number
     }
 
     static styles = css`
@@ -12,7 +13,7 @@ export class TimerModule extends LitElement {
             flex-direction: column;
         }
 
-        .timer-field, .avgtime-field {
+        .timer-field, .avgtime-field, .attTime-field {
             display: flex;
             position: absolute;
             top: 2rem;
@@ -28,8 +29,13 @@ export class TimerModule extends LitElement {
         }
 
         .avgtime-field {
-            top: 11rem
+            top: 15rem
         }
+
+        .attTime-field {
+            top: 28rem
+        }
+
 
         .unstarted {
             display: none
@@ -41,6 +47,7 @@ export class TimerModule extends LitElement {
         window.addEventListener('task-executer', (e) => {
             this.time = e.detail.time,
             this.avgTime = e.detail.avgTime
+            this.attempts = e.detail.attempts
         })
         window.addEventListener('start-handle', (e) => {
             this.startFlag = e.detail.startFlag
@@ -58,6 +65,10 @@ export class TimerModule extends LitElement {
             <figure class="avgtime-field">
                 <h1 class="avgtime-field__header" id="avgTimeField">${this.avgTime}</h1>
                 <h1 class="avgtime-fieldd__subheader"> sec</h1>
+            </figure>
+            <figure class="attTime-field">
+                <h1 class="avgtime-field__header" id="attField">${this.attempts}</h1>
+                <h1 class="avgtime-fieldd__subheader"> times</h1>
             </figure>
         </section>
         `

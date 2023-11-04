@@ -96,6 +96,7 @@ export class TaskExerciser extends LitElement {
     handleSumUp(e) {
         if (e.key === 'Enter') {
             if (this.firstNumber + this.secondNumber == e.target.value) {
+                console.log(this.curValGlob)
                 this.correctionFlag = true
                 this.firstNumber = this.randomDigit()
                 this.secondNumber = this.randomDigit()
@@ -111,10 +112,15 @@ export class TaskExerciser extends LitElement {
                         avgTime: this.avgTimeRes
                     }
                 }))
+                e.target.value = ''
+                this.lastLen = 0
+                this.lastValue = []
+                this.curValGlob = []
             }
             else {
                 this.correctionFlag = false
             }
+            
         }
     }
 
@@ -165,6 +171,7 @@ export class TaskExerciser extends LitElement {
         this.lastLen = 0
         this.lastValue = []
         this.correctionFlag = true
+        this.clearFlag = false
         this.revString = []
         this.curValGlob = []
         this.typeFlag = 'ltr'

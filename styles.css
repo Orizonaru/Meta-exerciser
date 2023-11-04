@@ -45,11 +45,17 @@ body, main {
 }
 
 .menu {
+    flex-direction: column;
     margin: 2rem auto;
     width: 35rem;
     gap: 2rem;
     align-items: stretch;
-    .menu-switcher, .menu-start {
-        flex-grow: 1;
+    .menu-upper {
+        flex-direction: row;
+        gap: 2rem;
+        .menu-upper__switcher, .menu-upper__start {
+            flex-grow: 1;
+            height: 200px;
+        }
     }
 }

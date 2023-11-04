@@ -13,17 +13,23 @@
         <script type="module" src="Components/TimerModule.js"></script>
         <script type="module" src="Components/StartModule.js"></script>
         <script type="module" src="Components/DigitSwitcher.js"></script>
+        <script type="module" src="Components/TypingModeSwitcher.js"></script>
     </head>
     <body>
         <section class='flex headline'>
             <h1 class="headline-header">Meta exerciser</h1>
             <h2 class="headline-subheader">Take your calculation skills to another level!</h2>
         </section>
-        <section class="menu flex">
-            <digit-switcher class="menu-switcher"></digit-switcher>
-            <start-module class="menu-start"></start-module>
-        </section>
         <task-engine></task-engine>
+        <section class="menu flex">
+            <section class="menu-upper flex">
+                <digit-switcher class="menu-upper__switcher"></digit-switcher>
+                <start-module class="menu-upper__start"></start-module>
+            </section>
+            <type-mode class="menu-type"></type-mode>
+        </section>
+        
         <time-module></time-module>
+        
     </body>
 </html>

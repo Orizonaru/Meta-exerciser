@@ -15,7 +15,8 @@ export class TaskExerciser extends LitElement {
         revString: Array,
         lastLen: Number,
         lastValue: Number,
-        curValGlob: Array
+        curValGlob: Array,
+        typeFlag: String,
     }
 
     static styles = 
@@ -118,36 +119,25 @@ export class TaskExerciser extends LitElement {
     }
 
     reverseText(e) {
-        let currentValue = e.target.value.split('')
-        let newElm = currentValue.slice(-1)  // взятие нового
-        let currentLen = currentValue.length
-        if (currentLen < this.lastLen) {
-            this.curValGlob = this.curValGlob.slice(0, this.curValGlob.length-1)
-            this.curValGlob = this.curValGlob.reverse()
-            e.target.value = this.curValGlob.join('')
-            this.curValGlob = this.curValGlob.reverse()
-        } else {
-            this.curValGlob.push(String(newElm))
-            this.curValGlob = this.curValGlob.reverse()
-            e.target.value = this.curValGlob.join('') // пулл в строку нового
-            this.curValGlob = this.curValGlob.reverse()
-            this.lastLen = currentLen
-            this.lastValue = currentValue
+        if (this.typeFlag === 'rtl') {
+            let currentValue = e.target.value.split('')
+            let newElm = currentValue.slice(-1)     // взятие нового
+            let currentLen = currentValue.length
+            if (currentLen < this.lastLen) {
+                this.curValGlob = this.curValGlob.slice(0, this.curValGlob.length-1)    
+                this.curValGlob = this.curValGlob.reverse() 
+                e.target.value = this.curValGlob.join('')   // пулл в строку нового
+                this.curValGlob = this.curValGlob.reverse()
+                this.lastLen = this.curValGlob.length
+            } else {
+                this.curValGlob.push(String(newElm))
+                this.curValGlob = this.curValGlob.reverse()
+                e.target.value = this.curValGlob.join('')       // пулл в строку нового
+                this.curValGlob = this.curValGlob.reverse()
+                this.lastLen = this.curValGlob.length
+                this.lastValue = currentValue
+            }
         }
-
-        
-        /*
-        let inputState = e.target.value.split('')
-        console.log(inputState)
-        
-        let currentValue = e.target.value.slice(-1)
-        e.target.value = ''
-        var newArray = this.revString.slice();
-
-        newArray.unshift(currentValue);
-        this.revString = newArray
-
-        e.target.value = this.revString.join('') */
     }
 
 
@@ -163,6 +153,10 @@ export class TaskExerciser extends LitElement {
             this.startFlag = e.detail.startFlag
             this.timerOn()
         })
+
+        window.addEventListener('type-handle', (e) => {
+            this.typeFlag = e.detail.type
+        })
         
         this.time = 0
         this.avgTime = 0
@@ -173,7 +167,7 @@ export class TaskExerciser extends LitElement {
         this.correctionFlag = true
         this.revString = []
         this.curValGlob = []
-        
+        this.typeFlag = 'ltr'
     }
 
     render() {

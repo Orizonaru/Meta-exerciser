@@ -26,7 +26,7 @@ export class DigitSwitcher extends LitElement {
         .switcher-header {
             margin: 0;
             color: var(--txt);
-            font-size: 3rem;
+            font-size: 2.5rem;
         }
 
         .switcher-input {
@@ -56,12 +56,12 @@ export class DigitSwitcher extends LitElement {
     `]
 
     digitSwitcher(e) {
+        dispatchEvent(new CustomEvent ('digit-handle', {
+            bubbles: true,
+            detail: {digit: e.target.value}
+        }))
         if (0 < e.target.value && e.target.value < 10) {
             this.correctionFlag = true
-            dispatchEvent(new CustomEvent ('digit-handle', {
-                bubbles: true,
-                detail: {digit: e.target.value}
-            }))
         }
         else {
             this.correctionFlag = false

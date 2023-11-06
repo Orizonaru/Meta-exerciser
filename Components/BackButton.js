@@ -32,9 +32,13 @@ export class BackButton extends LitElement {
     `
     backHandle() {
         this.startFlag = false
+        this.backFlag = true
         dispatchEvent(new CustomEvent('start-handle', {
             bubbles: true,
-            detail: {startFlag: this.startFlag}
+            detail: {
+                startFlag: this.startFlag,
+                backFlag: this.backFlag
+            }
         }))
     }
 
@@ -44,6 +48,7 @@ export class BackButton extends LitElement {
         window.addEventListener('start-handle', (e) => {
             this.startFlag = e.detail.startFlag
         })
+        this.backFlag = false
     }
     
     render() {

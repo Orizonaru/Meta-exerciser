@@ -14,9 +14,10 @@ export class TaskExerciser extends LitElement {
         avgTimeRes: Number,
         revString: Array,
         lastLen: Number,
-        lastValue: Number,
         curValGlob: Array,
         typeFlag: String,
+        backFlag: Boolean,
+        timerOn: Number
     }
 
     static styles = 
@@ -87,16 +88,13 @@ export class TaskExerciser extends LitElement {
         return Math.floor((Math.random() * (80*(10**(this.num-2))-1)+(10**(this.num-1))));
     }
 
-    timerOn() {
-        setInterval(() => 
-        (this.time+=1),
-        10);  
+    timerOff() {
+        clearInterval(this.timerOn)
     }
 
     handleSumUp(e) {
         if (e.key === 'Enter') {
             if (this.firstNumber + this.secondNumber == e.target.value) {
-                console.log(this.curValGlob)
                 this.correctionFlag = true
                 this.firstNumber = this.randomDigit()
                 this.secondNumber = this.randomDigit()
@@ -115,13 +113,11 @@ export class TaskExerciser extends LitElement {
                 }))
                 e.target.value = ''
                 this.lastLen = 0
-                this.lastValue = []
                 this.curValGlob = []
             }
             else {
                 this.correctionFlag = false
             }
-            
         }
     }
 
@@ -142,7 +138,6 @@ export class TaskExerciser extends LitElement {
                 e.target.value = this.curValGlob.join('')       // пулл в строку нового
                 this.curValGlob = this.curValGlob.reverse()
                 this.lastLen = this.curValGlob.length
-                this.lastValue = currentValue
             }
         }
     }
@@ -158,7 +153,25 @@ export class TaskExerciser extends LitElement {
         
         window.addEventListener('start-handle', (e) => {
             this.startFlag = e.detail.startFlag
-            this.timerOn()
+            this.backFlag = e.detail.backFlag
+            if (this.startFlag === true) {
+                this.timerOn = setInterval(() => (this.time+=1), 10)
+            } 
+            if (this.backFlag === true) {
+                this.timerOff()
+                this.time = 0
+                this.attempts = 0
+                this.avgTime = 0
+                this.avgTimeRes = 0
+                dispatchEvent(new CustomEvent ('task-executer', {
+                    bubbles: true,
+                    detail: {
+                        time: (this.time).toFixed(2),
+                        avgTime: this.avgTimeRes,
+                        attempts: this.attempts
+                    }
+                }))
+            }
         })
 
         window.addEventListener('type-handle', (e) => {
@@ -170,9 +183,7 @@ export class TaskExerciser extends LitElement {
         this.avgTimeRes = 0
         this.attempts = 0
         this.lastLen = 0
-        this.lastValue = []
         this.correctionFlag = true
-        this.clearFlag = false
         this.revString = []
         this.curValGlob = []
         this.typeFlag = 'ltr'

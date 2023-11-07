@@ -17,7 +17,8 @@ export class TaskExerciser extends LitElement {
         curValGlob: Array,
         typeFlag: String,
         backFlag: Boolean,
-        timerOn: Number
+        timerOn: Number,
+        expressionSign: String
     }
 
     static styles = 
@@ -88,38 +89,92 @@ export class TaskExerciser extends LitElement {
         return Math.floor((Math.random() * (80*(10**(this.num-2))-1)+(10**(this.num-1))));
     }
 
+
     timerOff() {
         clearInterval(this.timerOn)
     }
 
-    handleSumUp(e) {
-        if (e.key === 'Enter') {
-            if (this.firstNumber + this.secondNumber == e.target.value) {
-                this.correctionFlag = true
-                this.firstNumber = this.randomDigit()
-                this.secondNumber = this.randomDigit()
-                e.target.value = ''
-                this.time/=100
-                this.attempts+=1
-                this.avgTime+=this.time
-                this.avgTimeRes=((this.avgTime / this.attempts)).toFixed(2)
-                dispatchEvent(new CustomEvent ('task-executer', {
-                    bubbles: true,
-                    detail: {
-                        time: (this.time).toFixed(2),
-                        avgTime: this.avgTimeRes,
-                        attempts: this.attempts
-                    }
-                }))
-                e.target.value = ''
-                this.lastLen = 0
-                this.curValGlob = []
+    checkFunc(target) {
+        target = ''
+        this.time/=100
+        this.attempts+=1
+        this.avgTime+=this.time
+        this.avgTimeRes=((this.avgTime / this.attempts)).toFixed(2)
+        dispatchEvent(new CustomEvent ('task-executer', {
+            bubbles: true,
+            detail: {
+                time: (this.time).toFixed(2),
+                avgTime: this.avgTimeRes,
+                attempts: this.attempts
             }
-            else {
-                this.correctionFlag = false
+        }))
+        this.lastLen = 0
+        this.curValGlob = []
+    }
+
+    randomDivisionDigit() {
+        let a = []
+        while (a.length === 0) {
+            let first = this.randomDigit()
+            let second = this.randomDigit()
+            if (first % second === 0 && first != 1 && second != 1 && first != second) {
+                a.push(first, second)
             }
         }
+        return a
     }
+
+    handleSumUp(e) {
+        if (e.key === 'Enter') {
+            if (this.expressionSign === 'summ') {
+                if (this.firstNumber + this.secondNumber == e.target.value) {
+                    this.firstNumber = this.randomDigit()
+                    this.secondNumber = this.randomDigit()
+                    this.correctionFlag = true
+                    this.checkFunc(e.target.value)
+                    e.target.value = ''
+                } else {
+                    this.correctionFlag = false
+                }
+            }
+            if (this.expressionSign === 'subt') {
+                if (this.firstNumber - this.secondNumber == e.target.value) {
+                    this.firstNumber = this.randomDigit()
+                    this.secondNumber = this.randomDigit()
+                    this.correctionFlag = true
+                    this.checkFunc(e.target.value)
+                    e.target.value = ''
+                } else {
+                    this.correctionFlag = false
+                }
+            }
+            if (this.expressionSign === 'mult') {
+                if (this.firstNumber * this.secondNumber == e.target.value) {
+                    this.firstNumber = this.randomDigit()
+                    this.secondNumber = this.randomDigit()
+                    this.correctionFlag = true
+                    this.checkFunc(e.target.value)
+                    e.target.value = ''
+                } else {
+                    this.correctionFlag = false
+                }
+            }
+            if (this.expressionSign === 'div') {
+                if (this.firstNumber / this.secondNumber == e.target.value) {
+                    let divArr = this.randomDivisionDigit()
+                    this.firstNumber = parseInt(divArr.slice(0,1))
+                    this.secondNumber = parseInt(divArr.slice(-1))
+                    this.correctionFlag = true
+                    this.checkFunc(e.target.value)
+                    e.target.value = ''
+                } else {
+                    this.correctionFlag = false
+                }
+            }
+            }
+            
+        }
+
 
     reverseText(e) {
         if (this.typeFlag === 'rtl') {
@@ -147,6 +202,9 @@ export class TaskExerciser extends LitElement {
         super.connectedCallback()
         window.addEventListener('digit-handle', (e) => {
             this.num = e.detail.digit
+            //let divArr = this.randomDivisionDigit()
+            //        this.firstNumber = parseInt(divArr.slice(0,1))
+            //        this.secondNumber = parseInt(divArr.slice(-1))
             this.firstNumber = this.randomDigit()
             this.secondNumber = this.randomDigit()
         })
@@ -187,6 +245,7 @@ export class TaskExerciser extends LitElement {
         this.revString = []
         this.curValGlob = []
         this.typeFlag = 'ltr'
+        this.expressionSign = 'div'
     }
 
     render() {

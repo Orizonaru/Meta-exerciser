@@ -58,4 +58,8 @@ body, main {
             height: 200px;
         }
     }
+    .menu-bottom {
+        gap: 2rem;
+        flex-direction: column;
+    }
 }

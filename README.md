@@ -23,3 +23,12 @@ Chapter II: Meta exerciser
     > Transfer the project to Lit
     > Overall refactoring
     > Digit-changing system
+  MtEx v1.1:
+    > Appearance changes
+  MtEx v1.5:
+    > Added system, that allow user to switch between left-to-right and right-to-left typing
+    > Small style and optimization fixes
+  MtEx: v1.6:
+    > Added back button (beta)
+    > Added attemts counter
+    > Input bug fix

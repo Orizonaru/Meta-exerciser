@@ -53,13 +53,20 @@ export class SignSwitcher extends LitElement {
     `
 
     signHandle(e) {
-        console.log(e.target.value)
+        let value = parseInt(e.target.value)
+        this.signStatus[value] = !(this.signStatus[value])
+        dispatchEvent(new CustomEvent ('sign-handle', {
+            bubbles: true,
+            detail: {
+                signArray: this.signStatus
+            }
+        }))
     }
 
     connectedCallback() {
         super.connectedCallback()
         this.sign = ''
-        this.signStatus = [false, false, false, false]
+        this.signStatus = [true, false, false, false]
 
     }
 
@@ -69,16 +76,16 @@ export class SignSwitcher extends LitElement {
             <h2 class="main-header">Sign</h2>
             <section class="main-content flex">
                 <figure class="main-content__sign flex" name='sunn' value='summ' >
-                    <button value='1' class="main-content__sign-inner" @click = ${(e) => this.signHandle(e)}>+</button>
+                    <button value='0' class="main-content__sign-inner" @click = ${(e) => this.signHandle(e)}>+</button>
                 </figure>
                 <figure class="main-content__sign flex">
-                    <button value='subt' class="main-content__sign-inner" @click = ${(e) => this.signHandle(e)}>-</button>
+                    <button value='1' class="main-content__sign-inner" @click = ${(e) => this.signHandle(e)}>-</button>
                 </figure>
                 <figure class="main-content__sign flex">
-                    <button value='mult' class="main-content__sign-inner" @click = ${(e) => this.signHandle(e)}>×</button>
+                    <button value='2' class="main-content__sign-inner" @click = ${(e) => this.signHandle(e)}>×</button>
                 </figure>
                 <figure class="main-content__sign flex">
-                    <button value='div' class="main-content__sign-inner" @click = ${(e) => this.signHandle(e)}>÷</button>
+                    <button value='3' class="main-content__sign-inner" @click = ${(e) => this.signHandle(e)}>÷</button>
                 </figure>
             </section>
         </section>

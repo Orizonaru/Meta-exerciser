@@ -18,7 +18,8 @@ export class TaskExerciser extends LitElement {
         typeFlag: String,
         backFlag: Boolean,
         timerOn: Number,
-        expressionSign: String
+        expressionSign: String,
+        signArray: Array
     }
 
     static styles = 
@@ -126,7 +127,7 @@ export class TaskExerciser extends LitElement {
 
     handleSumUp(e) {
         if (e.key === 'Enter') {
-            if (this.expressionSign === 'summ') {
+            if (this.signArray[0]) {
                 if (this.firstNumber + this.secondNumber == e.target.value) {
                     this.firstNumber = this.randomDigit()
                     this.secondNumber = this.randomDigit()
@@ -137,7 +138,7 @@ export class TaskExerciser extends LitElement {
                     this.correctionFlag = false
                 }
             }
-            if (this.expressionSign === 'subt') {
+            if (this.signArray[1]) {
                 if (this.firstNumber - this.secondNumber == e.target.value) {
                     this.firstNumber = this.randomDigit()
                     this.secondNumber = this.randomDigit()
@@ -148,7 +149,7 @@ export class TaskExerciser extends LitElement {
                     this.correctionFlag = false
                 }
             }
-            if (this.expressionSign === 'mult') {
+            if (this.signArray[2]) {
                 if (this.firstNumber * this.secondNumber == e.target.value) {
                     this.firstNumber = this.randomDigit()
                     this.secondNumber = this.randomDigit()
@@ -159,7 +160,7 @@ export class TaskExerciser extends LitElement {
                     this.correctionFlag = false
                 }
             }
-            if (this.expressionSign === 'div') {
+            if (this.signArray[3]) {
                 if (this.firstNumber / this.secondNumber == e.target.value) {
                     let divArr = this.randomDivisionDigit()
                     this.firstNumber = parseInt(divArr.slice(0,1))
@@ -234,6 +235,10 @@ export class TaskExerciser extends LitElement {
 
         window.addEventListener('type-handle', (e) => {
             this.typeFlag = e.detail.type
+        })
+
+        window.addEventListener('sign-handle', (e) => {
+            this.signArray = e.detail.signArray
         })
         
         this.time = 0

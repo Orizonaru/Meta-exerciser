@@ -1,5 +1,6 @@
 # Meta exerciser
 This is a programm, that lets you to train yorself in calculating different numbers. 
+WARNING: the only stable versions of service is that have a vX.0, vX.5 or vX.Y names in their commit name. Other versions can be dev or beta versions and may NOT work!
 
 Version log:
 Chapter I: TDE

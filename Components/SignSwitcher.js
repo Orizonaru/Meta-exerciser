@@ -4,7 +4,8 @@ export class SignSwitcher extends LitElement {
     static properties = {
         startFlag: Boolean,
         sign: String,
-        signAlph: Array
+        signAlph: Array,
+        signStatus: Array
     }
 
     static styles = css`
@@ -58,7 +59,8 @@ export class SignSwitcher extends LitElement {
     connectedCallback() {
         super.connectedCallback()
         this.sign = ''
-        this.signAlph = ['summ', 'subt' ]
+        this.signStatus = [false, false, false, false]
+
     }
 
     render() {
@@ -66,17 +68,17 @@ export class SignSwitcher extends LitElement {
         <section class="main flex">
             <h2 class="main-header">Sign</h2>
             <section class="main-content flex">
-                <figure class="main-content__sign flex" name='sunn' value='summ' @click = ${(e) => this.signHandle(e)}>
-                    <h3 class="main-content__sign-inner">+</h3>
+                <figure class="main-content__sign flex" name='sunn' value='summ' >
+                    <button value='1' class="main-content__sign-inner" @click = ${(e) => this.signHandle(e)}>+</button>
                 </figure>
                 <figure class="main-content__sign flex">
-                    <h3 class="main-content__sign-inner">-</h3>
+                    <button value='subt' class="main-content__sign-inner" @click = ${(e) => this.signHandle(e)}>-</button>
                 </figure>
                 <figure class="main-content__sign flex">
-                    <h3 class="main-content__sign-inner">×</h3>
+                    <button value='mult' class="main-content__sign-inner" @click = ${(e) => this.signHandle(e)}>×</button>
                 </figure>
                 <figure class="main-content__sign flex">
-                    <h3 class="main-content__sign-inner">÷</h3>
+                    <button value='div' class="main-content__sign-inner" @click = ${(e) => this.signHandle(e)}>÷</button>
                 </figure>
             </section>
         </section>

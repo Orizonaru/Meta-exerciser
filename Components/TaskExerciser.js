@@ -19,7 +19,9 @@ export class TaskExerciser extends LitElement {
         backFlag: Boolean,
         timerOn: Number,
         expressionSign: String,
-        signArray: Array
+        signStatArray: Array,
+        signArray: Array,
+        signStatProd: Array
     }
 
     static styles = 
@@ -126,8 +128,9 @@ export class TaskExerciser extends LitElement {
     }
 
     handleSumUp(e) {
+        if (this.signStatArray[Math.floor(Math.random()*this.signStatArray.length)]);
         if (e.key === 'Enter') {
-            if (this.signArray[0]) {
+            if (this.signStatArray[0]) {
                 if (this.firstNumber + this.secondNumber == e.target.value) {
                     this.firstNumber = this.randomDigit()
                     this.secondNumber = this.randomDigit()
@@ -138,7 +141,7 @@ export class TaskExerciser extends LitElement {
                     this.correctionFlag = false
                 }
             }
-            if (this.signArray[1]) {
+            if (this.signStatArray[1]) {
                 if (this.firstNumber - this.secondNumber == e.target.value) {
                     this.firstNumber = this.randomDigit()
                     this.secondNumber = this.randomDigit()
@@ -149,7 +152,7 @@ export class TaskExerciser extends LitElement {
                     this.correctionFlag = false
                 }
             }
-            if (this.signArray[2]) {
+            if (this.signStatArray[2]) {
                 if (this.firstNumber * this.secondNumber == e.target.value) {
                     this.firstNumber = this.randomDigit()
                     this.secondNumber = this.randomDigit()
@@ -160,7 +163,7 @@ export class TaskExerciser extends LitElement {
                     this.correctionFlag = false
                 }
             }
-            if (this.signArray[3]) {
+            if (this.signStatArray[3]) {
                 if (this.firstNumber / this.secondNumber == e.target.value) {
                     let divArr = this.randomDivisionDigit()
                     this.firstNumber = parseInt(divArr.slice(0,1))
@@ -214,6 +217,9 @@ export class TaskExerciser extends LitElement {
             this.startFlag = e.detail.startFlag
             this.backFlag = e.detail.backFlag
             if (this.startFlag === true) {
+                if (this.signStatArray[3]) {
+
+                }
                 this.timerOn = setInterval(() => (this.time+=1), 10)
             } 
             if (this.backFlag === true) {
@@ -238,7 +244,7 @@ export class TaskExerciser extends LitElement {
         })
 
         window.addEventListener('sign-handle', (e) => {
-            this.signArray = e.detail.signArray
+            this.signStatArray = e.detail.signArray
         })
         
         this.time = 0
@@ -251,6 +257,7 @@ export class TaskExerciser extends LitElement {
         this.curValGlob = []
         this.typeFlag = 'ltr'
         this.expressionSign = 'div'
+        this.signArray = ['+', '-', '*', '/']
     }
 
     render() {

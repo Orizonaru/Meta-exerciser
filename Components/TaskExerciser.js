@@ -97,8 +97,7 @@ export class TaskExerciser extends LitElement {
         clearInterval(this.timerOn)
     }
 
-    checkFunc(target) {
-        target = ''
+    dispatchTime() {
         this.time/=100
         this.attempts+=1
         this.avgTime+=this.time
@@ -127,57 +126,40 @@ export class TaskExerciser extends LitElement {
         return a
     }
 
-    handleSumUp(e) {
-        if (this.signStatArray[Math.floor(Math.random()*this.signStatArray.length)]);
-        if (e.key === 'Enter') {
-            if (this.signStatArray[0]) {
-                if (this.firstNumber + this.secondNumber == e.target.value) {
-                    this.firstNumber = this.randomDigit()
-                    this.secondNumber = this.randomDigit()
-                    this.correctionFlag = true
-                    this.checkFunc(e.target.value)
-                    e.target.value = ''
-                } else {
-                    this.correctionFlag = false
-                }
-            }
-            if (this.signStatArray[1]) {
-                if (this.firstNumber - this.secondNumber == e.target.value) {
-                    this.firstNumber = this.randomDigit()
-                    this.secondNumber = this.randomDigit()
-                    this.correctionFlag = true
-                    this.checkFunc(e.target.value)
-                    e.target.value = ''
-                } else {
-                    this.correctionFlag = false
-                }
-            }
-            if (this.signStatArray[2]) {
-                if (this.firstNumber * this.secondNumber == e.target.value) {
-                    this.firstNumber = this.randomDigit()
-                    this.secondNumber = this.randomDigit()
-                    this.correctionFlag = true
-                    this.checkFunc(e.target.value)
-                    e.target.value = ''
-                } else {
-                    this.correctionFlag = false
-                }
-            }
-            if (this.signStatArray[3]) {
-                if (this.firstNumber / this.secondNumber == e.target.value) {
-                    let divArr = this.randomDivisionDigit()
-                    this.firstNumber = parseInt(divArr.slice(0,1))
-                    this.secondNumber = parseInt(divArr.slice(-1))
-                    this.correctionFlag = true
-                    this.checkFunc(e.target.value)
-                    e.target.value = ''
-                } else {
-                    this.correctionFlag = false
-                }
-            }
-            }
+    checkFunc(sI, target) {
+        if (sI != 3) {
+            this.firstNumber = this.randomDigit()
+            this.secondNumber = this.randomDigit()
+            this.correctionFlag = true
+            this.dispatchTime(target)
             
+        } else {
+            let divArr = this.randomDivisionDigit()
+            this.firstNumber = parseInt(divArr.slice(0,1))
+            this.secondNumber = parseInt(divArr.slice(-1))
+            this.correctionFlag = true
+            this.dispatchTime(target)
         }
+        
+    }
+
+    handleSumUp(e) {
+        if (e.key === 'Enter') {
+            let randSign = this.signStatArray[Math.floor(Math.random()*this.signStatArray.length)]
+            console.log(Math.floor(Math.random()*this.signStatArray.length))
+            if (randSign) {
+                let signIndex = this.signStatArray.indexOf(randSign)
+                if (this.firstNumber + this.secondNumber == e.target.value) {
+                    this.checkFunc(signIndex, e.target.value)
+                    e.target.value = ''
+                } else {
+                    this.correctionFlag = false
+                }
+            }
+        }
+    }
+            
+        
 
 
     reverseText(e) {
@@ -217,9 +199,6 @@ export class TaskExerciser extends LitElement {
             this.startFlag = e.detail.startFlag
             this.backFlag = e.detail.backFlag
             if (this.startFlag === true) {
-                if (this.signStatArray[3]) {
-
-                }
                 this.timerOn = setInterval(() => (this.time+=1), 10)
             } 
             if (this.backFlag === true) {

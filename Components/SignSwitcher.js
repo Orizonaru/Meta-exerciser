@@ -49,6 +49,11 @@ export class SignSwitcher extends LitElement {
         color: var(--txt);
         font-size: 2.5rem;
     }
+    .main-content__sign-inner {
+        margin: 0;
+        color: var(--txt);
+        font-size: 2.5rem;
+    }
     
     `
 

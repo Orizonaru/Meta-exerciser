@@ -21,7 +21,9 @@ export class TaskExerciser extends LitElement {
         expressionSign: String,
         signStatArray: Array,
         signArray: Array,
-        signStatProd: Array
+        signStatProd: Array,
+        signIndex: Number,
+        signString: Number
     }
 
     static styles = 
@@ -130,7 +132,6 @@ export class TaskExerciser extends LitElement {
         if (sI != 3) {
             this.firstNumber = this.randomDigit()
             this.secondNumber = this.randomDigit()
-            this.correctionFlag = true
             this.dispatchTime()
             
         } else {
@@ -147,12 +148,14 @@ export class TaskExerciser extends LitElement {
         if (e.key === 'Enter') {
             let signIndex = Math.floor(Math.random()*4)
             let randSignBool = this.signStatArray[signIndex]  // boolean
+            let signString = this.signArray[signIndex] // string (sign)
+            console.log(this.signStatArray)
+            console.log(eval(String(this.firstNumber) + signString + String(this.secondNumber)), signString)
             if (randSignBool) {
-                let signString = this.signArray[signIndex] // string (sign)
-                if (si)
-
-                if (this.firstNumber + this.secondNumber == e.target.value) {
+                if (eval(String(this.firstNumber) + signString + String(this.secondNumber)) == e.target.value) {
                     this.checkFunc(signIndex)
+                    console.log(1)
+                    this.correctionFlag = true
                     e.target.value = ''
                 } else {
                     this.correctionFlag = false
@@ -191,8 +194,8 @@ export class TaskExerciser extends LitElement {
         window.addEventListener('digit-handle', (e) => {
             this.num = e.detail.digit
             //let divArr = this.randomDivisionDigit()
-            //        this.firstNumber = parseInt(divArr.slice(0,1))
-            //        this.secondNumber = parseInt(divArr.slice(-1))
+            //this.firstNumber = parseInt(divArr.slice(0,1))
+            //this.secondNumber = parseInt(divArr.slice(-1))
             this.firstNumber = this.randomDigit()
             this.secondNumber = this.randomDigit()
         })
@@ -202,6 +205,9 @@ export class TaskExerciser extends LitElement {
             this.backFlag = e.detail.backFlag
             if (this.startFlag === true) {
                 this.timerOn = setInterval(() => (this.time+=1), 10)
+                // Здесь надо сделать EventListener для signIndex, а также определить значения signIndex и signString ниже в connectedCallback
+                // this.firstNumber = this.randomDigit()
+                // this.secondNumber = this.randomDigit()
             } 
             if (this.backFlag === true) {
                 this.timerOff()
@@ -239,6 +245,7 @@ export class TaskExerciser extends LitElement {
         this.typeFlag = 'ltr'
         this.expressionSign = 'div'
         this.signArray = ['+', '-', '*', '/']
+        this.signStatArray = [true, false, false, false]
     }
 
     render() {
@@ -248,7 +255,7 @@ export class TaskExerciser extends LitElement {
                 <figure class="flex counter-content">
                     <figure class="flex counter-content__expression">
                         <h2 id="firstNumber">${this.firstNumber}</h2>
-                        <h2>+</h2>
+                        <h2>${this.signString}</h2>
                         <h2 id="secondNumber">${this.secondNumber}</h2>
                     </figure>
                     <input  class="counter-content__input ${this.correctionFlag ? '' : 'incorrect'}" @keyup = ${(e) => this.handleSumUp(e)} @input = ${(e) => this.reverseText(e)} id="counterInput" inputmode="numeric" dir='rtl'>

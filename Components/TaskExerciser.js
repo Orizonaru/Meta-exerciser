@@ -126,31 +126,33 @@ export class TaskExerciser extends LitElement {
         return a
     }
 
-    checkFunc(sI, target) {
+    checkFunc(sI) {
         if (sI != 3) {
             this.firstNumber = this.randomDigit()
             this.secondNumber = this.randomDigit()
             this.correctionFlag = true
-            this.dispatchTime(target)
+            this.dispatchTime()
             
         } else {
             let divArr = this.randomDivisionDigit()
             this.firstNumber = parseInt(divArr.slice(0,1))
             this.secondNumber = parseInt(divArr.slice(-1))
             this.correctionFlag = true
-            this.dispatchTime(target)
+            this.dispatchTime()
         }
         
     }
 
     handleSumUp(e) {
         if (e.key === 'Enter') {
-            let randSign = this.signStatArray[Math.floor(Math.random()*this.signStatArray.length)]
-            console.log(Math.floor(Math.random()*this.signStatArray.length))
-            if (randSign) {
-                let signIndex = this.signStatArray.indexOf(randSign)
+            let signIndex = Math.floor(Math.random()*4)
+            let randSignBool = this.signStatArray[signIndex]  // boolean
+            if (randSignBool) {
+                let signString = this.signArray[signIndex] // string (sign)
+                if (si)
+
                 if (this.firstNumber + this.secondNumber == e.target.value) {
-                    this.checkFunc(signIndex, e.target.value)
+                    this.checkFunc(signIndex)
                     e.target.value = ''
                 } else {
                     this.correctionFlag = false

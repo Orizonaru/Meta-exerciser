@@ -36,10 +36,10 @@ export class SignSwitcher extends LitElement {
     }
 
     .main-content__sign {
+        cursor: pointer;
+        border-radius: 10px;
         margin: 0;
         border: 3px solid var(--txt);
-        border-radius: 10px;
-        padding: 1rem;
         width: 3rem;
         height: 3rem
     }
@@ -49,15 +49,28 @@ export class SignSwitcher extends LitElement {
         color: var(--txt);
         font-size: 2.5rem;
     }
-    .main-content__sign-inner {
-        margin: 0;
-        color: var(--txt);
-        font-size: 2.5rem;
+
+    .started {
+        display: none;
+    }
+
+    .button {
+        
+    }
+      
+    .text {
+        font-size: 3rem;
+        margin: 0
+    }
+      
+    .on {
+        border: 6px solid var(--txt)
     }
     
     `
 
     signHandle(e) {
+        
         let value = parseInt(e.target.value)
         this.signStatus[value] = !(this.signStatus[value])
         dispatchEvent(new CustomEvent ('sign-handle', {
@@ -72,15 +85,19 @@ export class SignSwitcher extends LitElement {
         super.connectedCallback()
         this.sign = ''
         this.signStatus = [true, false, false, false]
+        window.addEventListener('start-handle', (e) => {
+            this.startFlag = e.detail.startFlag
+            this.backFlag = e.detail.backFlag
+        })
 
     }
 
     render() {
         return html`
-        <section class="main flex">
+        <section class="main flex ${this.startFlag ? 'started' : ''}">
             <h2 class="main-header">Sign</h2>
             <section class="main-content flex">
-                <figure class="main-content__sign flex" name='sunn' value='summ' >
+                <figure class="main-content__sign flex">
                     <button value='0' class="main-content__sign-inner" @click = ${(e) => this.signHandle(e)}>+</button>
                 </figure>
                 <figure class="main-content__sign flex">

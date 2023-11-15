@@ -78,7 +78,6 @@ export class TaskExerciser extends LitElement {
         text-align: center;
         outline: none;
         user-select: none;
-        direction: rtl;
     }
     
     .incorrect {
@@ -258,7 +257,7 @@ export class TaskExerciser extends LitElement {
                         <h2>${this.signString}</h2>
                         <h2 id="secondNumber">${this.secondNumber}</h2>
                     </figure>
-                    <input  class="counter-content__input ${this.correctionFlag ? '' : 'incorrect'}" @keyup = ${(e) => this.handleSumUp(e)} @input = ${(e) => this.reverseText(e)} id="counterInput" inputmode="numeric" dir='rtl'>
+                    <input  class="counter-content__input ${this.correctionFlag ? '' : 'incorrect'}" @keyup = ${(e) => this.handleSumUp(e)} @input = ${(e) => this.reverseText(e)} id="counterInput" inputmode="numeric">
                 </figure>
             </section>
         </main>`

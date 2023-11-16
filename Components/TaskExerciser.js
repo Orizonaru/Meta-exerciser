@@ -23,7 +23,7 @@ export class TaskExerciser extends LitElement {
         signArray: Array,
         signStatProd: Array,
         signIndex: Number,
-        signString: Number
+        signString: String
     }
 
     static styles = 

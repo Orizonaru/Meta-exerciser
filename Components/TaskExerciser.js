@@ -23,7 +23,8 @@ export class TaskExerciser extends LitElement {
         signArray: Array,
         signStatProd: Array,
         signIndex: Number,
-        signString: Number
+        signString: Number,
+        curStatArray: Array
     }
 
     static styles = 
@@ -131,40 +132,29 @@ export class TaskExerciser extends LitElement {
         if (sI != 3) {
             this.firstNumber = this.randomDigit()
             this.secondNumber = this.randomDigit()
-            this.dispatchTime()
-            
         } else {
             let divArr = this.randomDivisionDigit()
             this.firstNumber = parseInt(divArr.slice(0,1))
             this.secondNumber = parseInt(divArr.slice(-1))
-            this.correctionFlag = true
-            this.dispatchTime()
         }
         
     }
 
     handleSumUp(e) {
         if (e.key === 'Enter') {
-            let signIndex = Math.floor(Math.random()*4)
-            let randSignBool = this.signStatArray[signIndex]  // boolean
-            let signString = this.signArray[signIndex] // string (sign)
-            console.log(this.signStatArray)
-            console.log(eval(String(this.firstNumber) + signString + String(this.secondNumber)), signString)
-            if (randSignBool) {
-                if (eval(String(this.firstNumber) + signString + String(this.secondNumber)) == e.target.value) {
-                    this.checkFunc(signIndex)
-                    console.log(1)
-                    this.correctionFlag = true
-                    e.target.value = ''
-                } else {
-                    this.correctionFlag = false
-                }
+            if (eval(String(this.firstNumber) + this.signString + String(this.secondNumber)) == e.target.value) {
+                this.signIndex = this.curStatArray[Math.floor(Math.random()*(this.curStatArray.length))]
+                this.signString = this.signArray[this.signIndex]
+                this.checkFunc(this.signIndex)
+                this.dispatchTime()
+                this.correctionFlag = true
+                e.target.value = ''
+            } else {
+                this.correctionFlag = false
             }
         }
     }
             
-        
-
 
     reverseText(e) {
         if (this.typeFlag === 'rtl') {
@@ -192,11 +182,6 @@ export class TaskExerciser extends LitElement {
         super.connectedCallback()
         window.addEventListener('digit-handle', (e) => {
             this.num = e.detail.digit
-            //let divArr = this.randomDivisionDigit()
-            //this.firstNumber = parseInt(divArr.slice(0,1))
-            //this.secondNumber = parseInt(divArr.slice(-1))
-            this.firstNumber = this.randomDigit()
-            this.secondNumber = this.randomDigit()
         })
         
         window.addEventListener('start-handle', (e) => {
@@ -204,9 +189,9 @@ export class TaskExerciser extends LitElement {
             this.backFlag = e.detail.backFlag
             if (this.startFlag === true) {
                 this.timerOn = setInterval(() => (this.time+=1), 10)
-                // Здесь надо сделать EventListener для signIndex, а также определить значения signIndex и signString ниже в connectedCallback
-                // this.firstNumber = this.randomDigit()
-                // this.secondNumber = this.randomDigit()
+                this.signIndex = this.curStatArray[Math.floor(Math.random()*(this.curStatArray.length))]
+                this.signString = this.signArray[this.signIndex]
+                this.checkFunc(this.signIndex)
             } 
             if (this.backFlag === true) {
                 this.timerOff()
@@ -231,6 +216,17 @@ export class TaskExerciser extends LitElement {
 
         window.addEventListener('sign-handle', (e) => {
             this.signStatArray = e.detail.signArray
+            this.curStatArray = []
+            for (let i = 0; i <= this.signStatArray.length-1; i++) {
+                if (this.signStatArray[i]) {
+                    this.curStatArray.push(i)
+                }
+            }
+            dispatchEvent(new CustomEvent('sign-check', {
+                detail: {
+                    signCheck: this.curStatArray.length
+                }
+            }))
         })
         
         this.time = 0
@@ -245,6 +241,8 @@ export class TaskExerciser extends LitElement {
         this.expressionSign = 'div'
         this.signArray = ['+', '-', '*', '/']
         this.signStatArray = [true, false, false, false]
+        this.curStatArray = [0]
+        this.signString = ''
     }
 
     render() {

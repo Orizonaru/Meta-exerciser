@@ -4,7 +4,8 @@ export class StartModule extends LitElement {
     static properties = {
         startFlag: Boolean,
         digit: Number,
-        correctionFlag: Boolean
+        correctionFlag: Boolean,
+        signCheck: Number
     }
 
     static styles = css`
@@ -43,7 +44,7 @@ export class StartModule extends LitElement {
     `
 
     startFunc(e) {
-        if (this.digit > 0 & this.digit < 10) {
+        if ((this.digit > 0 & this.digit < 10) && this.signCheck)  {
                 this.startFlag = true
                 this.correctionFlag = true
                 dispatchEvent(new CustomEvent('start-handle', {
@@ -65,6 +66,9 @@ export class StartModule extends LitElement {
         })
         window.addEventListener('start-handle', (e) => {
             this.startFlag = e.detail.startFlag
+        })
+        window.addEventListener('sign-check', (e) => {
+            this.signCheck = e.detail.signCheck
         })
         this.correctionFlag = true
     }

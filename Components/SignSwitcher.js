@@ -5,7 +5,7 @@ export class SignSwitcher extends LitElement {
         startFlag: Boolean,
         sign: String,
         signAlph: Array,
-        signStatus: Array
+        signStatus: Array,
     }
 
     static styles = css`
@@ -36,18 +36,20 @@ export class SignSwitcher extends LitElement {
     }
 
     .main-content__sign {
-        cursor: pointer;
-        border-radius: 10px;
         margin: 0;
-        border: 3px solid var(--txt);
-        width: 3rem;
-        height: 3rem
     }
 
     .main-content__sign-inner {
         margin: 0;
         color: var(--txt);
         font-size: 2.5rem;
+        cursor: pointer;
+        border-radius: 10px;
+        margin: 0;
+        border: 3px solid var(--txt);
+        background-color: var(--sbg);
+        width: 5rem;
+        height: 5rem
     }
 
     .started {
@@ -70,9 +72,10 @@ export class SignSwitcher extends LitElement {
     `
 
     signHandle(e) {
-        
         let value = parseInt(e.target.value)
-        this.signStatus[value] = !(this.signStatus[value])
+        let arrSign = [...this.signStatus];
+        arrSign[value] = !(arrSign[value])
+        this.signStatus = [...arrSign]
         dispatchEvent(new CustomEvent ('sign-handle', {
             bubbles: true,
             detail: {
@@ -89,6 +92,7 @@ export class SignSwitcher extends LitElement {
             this.startFlag = e.detail.startFlag
             this.backFlag = e.detail.backFlag
         })
+        
 
     }
 
@@ -98,16 +102,16 @@ export class SignSwitcher extends LitElement {
             <h2 class="main-header">Sign</h2>
             <section class="main-content flex">
                 <figure class="main-content__sign flex">
-                    <button value='0' class="main-content__sign-inner" @click = ${(e) => this.signHandle(e)}>+</button>
+                    <button value='0' class="main-content__sign-inner flex ${(this.signStatus[0]) ? 'on' : ''}" @click = ${(e) => this.signHandle(e)}>+</button>
                 </figure>
                 <figure class="main-content__sign flex">
-                    <button value='1' class="main-content__sign-inner" @click = ${(e) => this.signHandle(e)}>-</button>
+                    <button value='1' class="main-content__sign-inner ${(this.signStatus[1]) ? 'on' : ''}" @click = ${(e) => this.signHandle(e)}>-</button>
                 </figure>
                 <figure class="main-content__sign flex">
-                    <button value='2' class="main-content__sign-inner" @click = ${(e) => this.signHandle(e)}>×</button>
+                    <button value='2' class="main-content__sign-inner ${(this.signStatus[2]) ? 'on' : ''}" @click = ${(e) => this.signHandle(e)}>×</button>
                 </figure>
                 <figure class="main-content__sign flex">
-                    <button value='3' class="main-content__sign-inner" @click = ${(e) => this.signHandle(e)}>÷</button>
+                    <button value='3' class="main-content__sign-inner ${(this.signStatus[3]) ? 'on' : ''}" @click = ${(e) => this.signHandle(e)}>÷</button>
                 </figure>
             </section>
         </section>

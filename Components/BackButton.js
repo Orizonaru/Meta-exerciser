@@ -48,6 +48,7 @@ export class BackButton extends LitElement {
         window.addEventListener('start-handle', (e) => {
             this.startFlag = e.detail.startFlag
         })
+        
         this.backFlag = false
     }
     

@@ -29,7 +29,11 @@ Chapter II: Meta exerciser
   MtEx v1.5:
     > Added system, that allow user to switch between left-to-right and right-to-left typing
     > Small style and optimization fixes
-  MtEx: v1.6:
+  MtEx v1.6:
     > Added back button (beta)
     > Added attemts counter
     > Input bug fix
+  MtEx v2.0:
+    > Sign switcher now working - this means user now can choose between expressions with different signs
+    > Bug fixes
+    > Style changes

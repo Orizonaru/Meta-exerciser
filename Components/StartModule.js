@@ -24,6 +24,7 @@ export class StartModule extends LitElement {
             border: 3px solid var(--txt);
             border-radius: 10px;
             font-size: 2.5rem;
+            font-family: 'Montserrat', sans-serif;
             font-weight: bolder;
             width: 8rem;
             height: 4.5rem;
@@ -71,6 +72,7 @@ export class StartModule extends LitElement {
             this.signCheck = e.detail.signCheck
         })
         this.correctionFlag = true
+        this.signCheck = true
     }
 
     render() {

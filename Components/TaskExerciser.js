@@ -11,6 +11,8 @@ export class TaskExerciser extends LitElement {
         time: Number, 
         avgTime: Number, 
         attempts: Number,
+        failed: Number,
+        entered: Number,
         avgTimeRes: Number,
         revString: Array,
         lastLen: Number,
@@ -24,7 +26,8 @@ export class TaskExerciser extends LitElement {
         signStatProd: Array,
         signIndex: Number,
         signString: Number,
-        curStatArray: Array
+        curStatArray: Array,
+        metricStatArray: Array
     }
 
     static styles = 
@@ -100,6 +103,7 @@ export class TaskExerciser extends LitElement {
     }
 
     dispatchTime() {
+        this.succeed+=1
         this.time/=100
         this.attempts+=1
         this.avgTime+=this.time
@@ -109,7 +113,8 @@ export class TaskExerciser extends LitElement {
             detail: {
                 time: (this.time).toFixed(2),
                 avgTime: this.avgTimeRes,
-                attempts: this.attempts
+                attempts: this.attempts,
+                percent: (((this.entered-this.failed)/(this.entered))*100).toFixed(2)
             }
         }))
         this.lastLen = 0
@@ -142,6 +147,7 @@ export class TaskExerciser extends LitElement {
 
     handleSumUp(e) {
         if (e.key === 'Enter') {
+            this.entered+=1
             if (eval(String(this.firstNumber) + this.signString + String(this.secondNumber)) == e.target.value) {
                 this.signIndex = this.curStatArray[Math.floor(Math.random()*(this.curStatArray.length))]
                 this.signString = this.signArray[this.signIndex]
@@ -149,9 +155,13 @@ export class TaskExerciser extends LitElement {
                 this.dispatchTime()
                 this.correctionFlag = true
                 e.target.value = ''
+                
             } else {
                 this.correctionFlag = false
+                this.failed+=1
+                
             }
+            console.log(this.entered, this.failed)
         }
     }
             
@@ -199,6 +209,8 @@ export class TaskExerciser extends LitElement {
                 this.attempts = 0
                 this.avgTime = 0
                 this.avgTimeRes = 0
+                this.entered = 0
+                this.failed = 0
                 dispatchEvent(new CustomEvent ('task-executer', {
                     bubbles: true,
                     detail: {
@@ -228,12 +240,18 @@ export class TaskExerciser extends LitElement {
                 }
             }))
         })
+
+        window.addEventListener('metircs-handle', (e) => {
+            this.metricStatArray = e.detail.metrics
+        })
         
         this.time = 0
         this.avgTime = 0
         this.avgTimeRes = 0
         this.attempts = 0
+        this.failed = 0
         this.lastLen = 0
+        this.entered = 0
         this.correctionFlag = true
         this.revString = []
         this.curValGlob = []

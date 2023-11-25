@@ -63,3 +63,9 @@ body, main {
         flex-direction: column;
     }
 }
+
+.metrics {
+    position: absolute;
+    top: 0rem;
+    right: 0rem;
+}

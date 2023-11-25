@@ -55,10 +55,6 @@ export class SignSwitcher extends LitElement {
     .started {
         display: none;
     }
-
-    .button {
-        
-    }
       
     .text {
         font-size: 3rem;
@@ -93,7 +89,7 @@ export class SignSwitcher extends LitElement {
             this.backFlag = e.detail.backFlag
         })
         
-
+    
     }
 
     render() {

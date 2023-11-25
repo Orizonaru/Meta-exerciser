@@ -10,12 +10,13 @@
         <link rel="icon" href="favicon.ico">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
         <script type="module" src="Components/TaskExerciser.js"></script>
-        <script type="module" src="Components/TimerModule.js"></script>
+        <script type="module" src="Components/MetricsModule.js"></script>
         <script type="module" src="Components/StartModule.js"></script>
         <script type="module" src="Components/DigitSwitcher.js"></script>
         <script type="module" src="Components/TypingModeSwitcher.js"></script>
         <script type="module" src="Components/BackButton.js"></script>
         <script type="module" src="Components/SignSwitcher.js"></script>
+        <script type="module" src="Components/MetricsSwitcher.js"></script>
     </head>
     <body>
         <section class='flex headline'>
@@ -31,9 +32,10 @@
             <section class="menu-bottom flex">
                 <type-mode class="menu-type"></type-mode>
                 <sign-switcher></sign-switcher>
+                <metrics-switcher></metrics-switcher>
             </section>
         </section>
-        <time-module></time-module>
+        <metrics-module class="metrics"></metrics-module>
         <back-button></back-button>
     </body>
 </html>

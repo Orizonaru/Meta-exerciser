@@ -156,7 +156,6 @@ export class TaskExerciser extends LitElement {
             } else {
                 this.correctionFlag = false
                 this.failed+=1
-                
             }
             console.log(this.entered, this.failed)
         }

@@ -123,13 +123,10 @@ export class TaskExerciser extends LitElement {
 
     randomDivisionDigit() {
         let a = []
-        while (a.length === 0) {
-            let first = this.randomDigit()
-            let second = this.randomDigit()
-            if (first % second === 0 && first != 1 && second != 1 && first != second) {
-                a.push(first, second)
-            }
-        }
+        let divider = Math.floor(Math.random() * 9)+1
+        let mid = Math.floor((10**this.num)/divider)
+        let divisible = Math.floor(Math.random() * ((mid-1)-(10**(this.num-1)) +1)) + 10**(this.num-1)
+        a.push(divisible, divider)
         return a
     }
 

@@ -1,0 +1,9 @@
+import { TaskExerciser } from "./Components/TaskExerciser.js";
+import { AuthButton } from "./Components/AuthButton.js";
+import { BackButton } from "./components/BackButton.js";
+import { DigitSwitcher } from "./components/DigitSwitcher.js";
+import { MetricsModule } from "./components/MetricsModule.js";
+import { MetricsSwitcher } from "./components/MetricsSwitcher.js";
+import { SignSwitcher } from "./components/SignSwitcher.js";
+import { StartModule } from "./components/StartModule.js";
+import { TypingModeSwitcher } from "./components/TypingModeSwitcher.js";

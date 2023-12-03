@@ -1,5 +1,4 @@
-import { LitElement, html, css } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
-
+import { LitElement, html, css } from "lit";
 
 export class TaskExerciser extends LitElement {
     static properties = {
@@ -126,7 +125,7 @@ export class TaskExerciser extends LitElement {
         let divider = Math.floor(Math.random() * 9)+1
         let mid = Math.floor((10**this.num)/divider)
         let divisible = Math.floor(Math.random() * ((mid-1)-(10**(this.num-1)) +1)) + 10**(this.num-1)
-        a.push(divisible, divider)
+        a.push((divider*divisible), divisible)
         return a
     }
 

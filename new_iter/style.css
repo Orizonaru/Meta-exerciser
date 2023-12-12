@@ -1,0 +1,100 @@
+:root {
+    --standart-margin: 3rem;
+    --outer-width: 10rem;
+    --outer-height: 10rem;
+    --static-width: calc(2 * var(--outer-width));
+    --static-height: calc(2 * var(--outer-height));
+}
+
+
+.inner {
+    position: relative;
+    background-color: rgb(0, 133, 250);
+    width: 5rem;
+    height: 5rem;
+    z-index: 1;
+    margin: 0;
+}
+
+.center {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body {
+    margin: 0
+}
+
+.main-grid {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    row-gap: calc(100% - ((2 * var(--outer-height)) + (4 * var(--standart-margin))));
+    column-gap: calc(100% - ((2 * var(--outer-width)) + (4 * var(--standart-margin))));
+    align-items: center;
+}
+
+.outer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    background-color: rgb(254, 0, 0);
+    width: var(--outer-width);
+    height: var(--outer-height);
+    padding: 0;
+    margin: var(--standart-margin);
+}
+
+.backbox {
+    position: absolute;
+    width: calc(-1 * var(--static-width) + 100%);
+    height: calc(-1 * var(--static-height) + 100%);
+    background-color: bisque;
+    z-index: -1;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.ru {
+    top: 1rem;
+    right: 1rem;
+}
+
+.lu {
+    top: 1rem;
+    left: 1rem;
+}
+
+.rd {
+    bottom: 1rem;
+    right: 1rem;
+}
+
+.ld {
+    bottom: 1rem;
+    left: 1rem;
+}
+
+.started {
+    row-gap: 0;
+    width: var(--static-width);
+    height: var(--static-height);
+}
+
+.started1 {
+    margin: 0
+}
+
+.started2 {
+    width: 50%
+}

@@ -1,9 +1,9 @@
 :root {
-    --standart-margin: 3rem;
-    --outer-width: 25rem;
-    --outer-height: 15rem;
-    --inner-width: 22rem;
-    --inner-height: 12rem;
+    --standart-margin: 2rem;
+    --outer-width: 25vw;
+    --outer-height: 30vh;
+    --inner-width: 22vw;
+    --inner-height: 25vh;
     --static-width: calc(2 * var(--outer-width));
     --static-height: calc(2 * var(--outer-height));
     --main-backcolor: #09314B;
@@ -13,12 +13,14 @@
 
 .inner {
     position: relative;
-    border-radius: 2rem;
+    border-radius: 1rem;
     background-color: var(--inner-backcolor);
     width:  var(--inner-width);
+    min-width: 15rem;
     height: var(--inner-height);
     z-index: 1;
-    margin: calc((var(--outer-height) - var(--inner-height)) / 2) auto
+    margin: calc((var(--outer-height) - var(--inner-height)) / 2) auto;
+    
 }
 
 .center {
@@ -44,24 +46,26 @@ body {
     align-items: center;
 }
 
+
 .outer {
     flex-grow: 1;
     background-color: var(--outer-backcolor);
     width: var(--outer-width);
+    min-width: 15rem
     height: var(--outer-height);
     padding: 0;
     margin: var(--standart-margin);
     .center {
         width: calc(var(--outer-width) + var(--standart-margin))
     };
-    border-radius: 3rem;
-    ;
+    border-radius: 2rem;
 }
 
 .backbox {
     position: absolute;
-    width: calc(-1 * var(--static-width) + 100%);
-    height: calc(-1 * var(--static-height) + 100%);
+    width: calc(-1 * var(--static-width) + 100% + 4rem);
+    min-width: calc(var(--outer-width) + 4 * var(--standart-margin));
+    height: calc(-1 * var(--static-height) + 100% + 4rem);
     background-color: var(--outer-backcolor);
     z-index: -1;
 }
@@ -71,9 +75,12 @@ main {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    .center {
+        width: calc(var(--outer-width) + 2 * var(--standart-margin))
+    };
 }
 
-/*
+
 .ru {
     top: 1rem;
     right: 1rem;
@@ -93,7 +100,6 @@ main {
     bottom: 1rem;
     left: 1rem;
 }
-*/
 
 .started {
     row-gap: 0;

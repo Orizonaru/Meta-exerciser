@@ -11,6 +11,10 @@
     --inner-backcolor: #3282b8
 }
 
+#flowButton {
+    z-index: 5;
+}
+
 .inner {
     position: relative;
     border-radius: 1rem;
@@ -20,7 +24,6 @@
     height: var(--inner-height);
     z-index: 1;
     margin: calc((var(--outer-height) - var(--inner-height)) / 2) auto;
-    
 }
 
 .center {
@@ -48,10 +51,10 @@ body {
 
 
 .outer {
-    flex-grow: 1;
+    grid-area: 1 / 1 / 1 / 1;
     background-color: var(--outer-backcolor);
     width: var(--outer-width);
-    min-width: 15rem
+    min-width: 15rem;
     height: var(--outer-height);
     padding: 0;
     margin: var(--standart-margin);
@@ -60,6 +63,25 @@ body {
     };
     border-radius: 2rem;
 }
+
+.top-left {
+    
+}
+
+.top-right {
+    margin-left: 73vw;
+}
+
+.bot-left {
+    margin-top: 20vh;   
+}
+
+.bot-right {
+    margin-left: 73vw;
+    margin-top: 73vh;
+}
+
+
 
 .backbox {
     position: absolute;
@@ -87,8 +109,8 @@ main {
 }
 
 .lu {
-    top: 1rem;
-    left: 1rem;
+    margin-bottom: -2rem;
+    margin-right: -2rem;
 }
 
 .rd {
@@ -102,13 +124,13 @@ main {
 }
 
 .started {
-    row-gap: 0;
     width: var(--static-width);
     height: var(--static-height);
+    padding: 5rem
 }
 
 .started1 {
-    margin: 0
+    margin: 0;
 }
 
 .started2 {

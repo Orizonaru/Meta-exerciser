@@ -51,7 +51,6 @@ body {
 
 
 .outer {
-    grid-area: 1 / 1 / 1 / 1;
     background-color: var(--outer-backcolor);
     width: var(--outer-width);
     min-width: 15rem;
@@ -65,20 +64,20 @@ body {
 }
 
 .top-left {
-    
+    grid-area: 1 / 1 / 1 / 1;
 }
 
 .top-right {
-    margin-left: 73vw;
+    margin-left: 1vw;
 }
 
 .bot-left {
-    margin-top: 20vh;   
+    margin-top: 1vh;   
 }
 
 .bot-right {
-    margin-left: 73vw;
-    margin-top: 73vh;
+    margin-left: 1vw;
+    margin-top: 1vh;
 }
 
 
@@ -134,5 +133,19 @@ main {
 }
 
 .started2 {
-    width: 50%
+    width: 50%;
+    .top-left {
+        margin-left: var(--standart-margin);
+        margin-top: var(--standart-margin)
+    };
+    .top-right {
+        margin-left: 1vw;
+    };
+    .bot-left {
+        margin-top: 1vh;   
+    };
+    .bot-right {
+        margin-left: 1vw;
+        margin-top: 1vh;
+    };
 }

@@ -8,7 +8,7 @@ function switcher() {
         // inner[i].classList.toggle('started1')
         outer[i].classList.toggle('started1')
     }
-    grid[0].classList.toggle('started')
+    main[0].classList.toggle('started')
 
 }
 
